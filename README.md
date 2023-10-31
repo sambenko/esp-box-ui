@@ -1,5 +1,7 @@
 # ESP-Box UI Crate
 
+![UI](images/ui.png)
+
 Welcome to the ESP-Box UI crate! This crate is engineered to draw elegant UI elements on any ESP-Box devices, providing a visual representation of sensor data measured using a BME680 sensor connected to the device. The UI elements include readings for humidity, pressure, and temperature. 
 
 ## Features
