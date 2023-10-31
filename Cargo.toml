@@ -1,0 +1,12 @@
+[package]
+name = "esp_box_ui"
+version = "0.1.0"
+authors = ["sambenko <sam.benko@gmail.com>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+heapless = { version = "0.7.16", default-features = false }
+embedded-graphics = "0.8.1"
+profont = "0.7.0"
+tinybmp = "0.5.0"
