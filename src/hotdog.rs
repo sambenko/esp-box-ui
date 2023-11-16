@@ -101,3 +101,26 @@ where
         .into_styled(style)
         .draw(display);
 }
+
+pub fn buy_one_button<D>(display: &mut D)
+where 
+    D:DrawTarget<Color = Rgb565>+Dimensions {
+
+        let style = PrimitiveStyleBuilder::new()
+            .stroke_width(3)
+            .stroke_color(Rgb565::BLACK)
+            .fill_color(Rgb565::CSS_ALICE_BLUE)
+            .build();
+
+        let label_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
+
+        RoundedRectangle::with_equal_corners(
+            Rectangle::new(Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 10, POS_Y + 10), Size::new((FIELD_WIDTH_PRICE - 10) as u32, 55)),
+            Size::new(5, 5),
+        )
+        .into_styled(style)
+        .draw(display);
+        
+        Text::new("BUY 1", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 15, POS_Y + 25), label_style)
+        .draw(display);
+}
