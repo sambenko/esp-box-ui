@@ -24,7 +24,7 @@ where
     D:DrawTarget<Color = Rgb565>+Dimensions {
     let icon_data = include_bytes!("../icons/hot-dog.bmp");
     let hotdog = Bmp::from_slice(icon_data).unwrap();
-    Image::new(&hotdog, Point::new(POS_X, POS_Y)).draw(display);
+    Image::new(&hotdog, Point::new(POS_X + 10, POS_Y + 10)).draw(display);
 }
 
 pub fn hotdog_field<D>(display: &mut D, amount: i32, price: f32)
@@ -39,10 +39,10 @@ where
 
     let label_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
-    Text::new("Amount:", Point::new(POS_X + LABEL_OFFSET - 10, POS_Y + 15), label_style)
+    Text::new("Amount", Point::new(POS_X + LABEL_OFFSET - 10, POS_Y + 15), label_style)
         .draw(display);
 
-    Text::new("Price:", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 15), label_style)
+    Text::new("Price", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 15), label_style)
         .draw(display);
 
     // draw amount field
