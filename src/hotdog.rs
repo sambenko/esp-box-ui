@@ -39,15 +39,15 @@ where
 
     let label_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
-    Text::new("Amount:", Point::new(POS_X + LABEL_OFFSET + 10, POS_Y + 10), label_style)
+    Text::new("Amount:", Point::new(POS_X + LABEL_OFFSET, POS_Y + 10), label_style)
         .draw(display);
 
-    Text::new("Price:", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 20, POS_Y + 10), label_style)
+    Text::new("Price:", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 10), label_style)
         .draw(display);
 
     // draw amount field
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X + LABEL_OFFSET, POS_Y + 35), Size::new(FIELD_WIDTH_AMOUNT as u32, 30)),
+        Rectangle::new(Point::new(POS_X + LABEL_OFFSET, POS_Y + 25), Size::new(FIELD_WIDTH_AMOUNT as u32, 30)),
         Size::new(5, 5),
     )
     .into_styled(style)
@@ -55,7 +55,7 @@ where
 
     // Draw price field
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 20, POS_Y + 35), Size::new(FIELD_WIDTH_PRICE as u32, 30)),
+        Rectangle::new(Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 20, POS_Y + 25), Size::new(FIELD_WIDTH_PRICE as u32, 30)),
         Size::new(5, 5),
     )
     .into_styled(style)
@@ -70,8 +70,8 @@ where
 
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
-    let amount_position = Point::new(POS_X + LABEL_OFFSET + 15, POS_Y + 30);
-    let price_position = Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 30);
+    let amount_position = Point::new(POS_X + LABEL_OFFSET + 15, POS_Y + 35);
+    let price_position = Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 35);
 
     let mut amount_string: heapless::String<16> = heapless::String::new();
     let mut price_string: heapless::String<16> = heapless::String::new();
