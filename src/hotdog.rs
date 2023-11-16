@@ -39,10 +39,10 @@ where
 
     let label_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
-    Text::new("Amount", Point::new(POS_X + LABEL_OFFSET - 10, POS_Y + 15), label_style)
+    Text::new("Amount", Point::new(POS_X + LABEL_OFFSET - 10, POS_Y + 20), label_style)
         .draw(display);
 
-    Text::new("Price", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 15), label_style)
+    Text::new("Price", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 20), label_style)
         .draw(display);
 
     // draw amount field
@@ -70,8 +70,8 @@ where
 
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
-    let amount_position = Point::new(POS_X + LABEL_OFFSET + 15, POS_Y + 40);
-    let price_position = Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 40);
+    let amount_position = Point::new(POS_X + LABEL_OFFSET + 15, POS_Y + 45);
+    let price_position = Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 45);
 
     let mut amount_string: heapless::String<16> = heapless::String::new();
     let mut price_string: heapless::String<16> = heapless::String::new();
