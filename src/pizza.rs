@@ -13,13 +13,14 @@ use profont::PROFONT_18_POINT;
 use tinybmp::Bmp;
 
 const POS_X: i32 = 10;
-const POS_Y: i32 = 90; // Starting Y position for the pizza section
+const POS_Y: i32 = 90;
+const FIELD_WIDTH: i32 = 100;
+const LABEL_OFFSET: i32 = 60;
 
 pub fn pizza_icon<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
-
-    let icon_data = include_bytes!("../icons/temperature.bmp");
+    let icon_data = include_bytes!("../icons/humidity.bmp");
     let pizza = Bmp::from_slice(icon_data).unwrap();
     Image::new(&pizza, Point::new(POS_X, POS_Y)).draw(display);
 }
@@ -34,17 +35,27 @@ where
         .fill_color(Rgb565::CSS_ALICE_BLUE)
         .build();
 
-    // Placeholder for the amount
+    let label_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
+
+    // Draw "Amount" label
+    Text::new("Amount:", Point::new(POS_X + LABEL_OFFSET, POS_Y), label_style)
+        .draw(display);
+
+    // Draw "Price" label
+    Text::new("Price:", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH + 10, POS_Y), label_style)
+        .draw(display);
+
+    // Draw amount field
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X + 60, POS_Y), Size::new(50, 30)),
+        Rectangle::new(Point::new(POS_X + LABEL_OFFSET, POS_Y + 20), Size::new(FIELD_WIDTH as u32, 30)),
         Size::new(5, 5),
     )
     .into_styled(style)
     .draw(display);
 
-    // Placeholder for the price
+    // Draw price field
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X + 120, POS_Y), Size::new(50, 30)),
+        Rectangle::new(Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH + 10, POS_Y + 20), Size::new(FIELD_WIDTH as u32, 30)),
         Size::new(5, 5),
     )
     .into_styled(style)

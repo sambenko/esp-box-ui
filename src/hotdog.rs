@@ -3,7 +3,7 @@
 
 use embedded_graphics::{
     mono_font::MonoTextStyle, pixelcolor::Rgb565, text::Text, Drawable,
-    primitives::{ RoundedRectangle, PrimitiveStyleBuilder, Rectangle, Primitive },
+    primitives::{RoundedRectangle, PrimitiveStyleBuilder, Rectangle, Primitive},
     image::Image, 
     prelude::{DrawTarget, Dimensions, Point, RgbColor, WebColors, Size},
 };
@@ -13,14 +13,14 @@ use profont::PROFONT_18_POINT;
 use tinybmp::Bmp;
 
 const POS_X: i32 = 10;
-const POS_Y: i32 = 10;
-const SECTION_HEIGHT: i32 = 80;
+const POS_Y: i32 = 10; // Starting Y position for the hotdog section
+const FIELD_WIDTH: i32 = 100;
+const LABEL_OFFSET: i32 = 60;
 
 pub fn hotdog_icon<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
-    
-    let icon_data = include_bytes!("../icons/pressure.bmp");
+    let icon_data = include_bytes!("../icons/temperature.bmp");
     let hotdog = Bmp::from_slice(icon_data).unwrap();
     Image::new(&hotdog, Point::new(POS_X, POS_Y)).draw(display);
 }
@@ -28,42 +28,47 @@ where
 pub fn hotdog_field<D>(display: &mut D, amount: i32, price: f32)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
-    
+
     let style = PrimitiveStyleBuilder::new()
         .stroke_width(3)
         .stroke_color(Rgb565::BLACK)
         .fill_color(Rgb565::CSS_ALICE_BLUE)
         .build();
 
-    // Placeholder for the amount
+    let label_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
+
+    Text::new("Amount:", Point::new(POS_X + LABEL_OFFSET, POS_Y), label_style)
+        .draw(display);
+
+    Text::new("Price:", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH + 10, POS_Y), label_style)
+        .draw(display);
+
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X + 60, POS_Y), Size::new(50, 30)),
+        Rectangle::new(Point::new(POS_X + LABEL_OFFSET, POS_Y + 20), Size::new(FIELD_WIDTH as u32, 30)),
         Size::new(5, 5),
     )
     .into_styled(style)
     .draw(display);
 
-    // Placeholder for the price
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X + 120, POS_Y), Size::new(50, 30)),
+        Rectangle::new(Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH + 10, POS_Y + 20), Size::new(FIELD_WIDTH as u32, 30)),
         Size::new(5, 5),
     )
     .into_styled(style)
     .draw(display);
 
-    // Update text for amount and price
     update_hotdog(display, amount, price);
 }
 
 pub fn update_hotdog<D>(display: &mut D, amount: i32, price: f32)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
-    
+
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
-    let amount_position = Point::new(POS_X + 65, POS_Y + 5);
-    let price_position = Point::new(POS_X + 125, POS_Y + 5);
-    
+    let amount_position = Point::new(POS_X + LABEL_OFFSET + 5, POS_Y + 25);
+    let price_position = Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH + 15, POS_Y + 25);
+
     let mut amount_string: heapless::String<16> = heapless::String::new();
     let mut price_string: heapless::String<16> = heapless::String::new();
 
