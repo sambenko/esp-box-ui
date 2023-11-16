@@ -39,10 +39,10 @@ where
 
     let label_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
-    Text::new("Amount:", Point::new(POS_X + LABEL_OFFSET, POS_Y + 10), label_style)
+    Text::new("Amount:", Point::new(POS_X + LABEL_OFFSET - 10, POS_Y + 15), label_style)
         .draw(display);
 
-    Text::new("Price:", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 10), label_style)
+    Text::new("Price:", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 15), label_style)
         .draw(display);
 
     // draw amount field
@@ -70,8 +70,8 @@ where
 
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
-    let amount_position = Point::new(POS_X + LABEL_OFFSET + 15, POS_Y + 35);
-    let price_position = Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 35);
+    let amount_position = Point::new(POS_X + LABEL_OFFSET + 15, POS_Y + 40);
+    let price_position = Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 40);
 
     let mut amount_string: heapless::String<16> = heapless::String::new();
     let mut price_string: heapless::String<16> = heapless::String::new();
@@ -83,19 +83,21 @@ where
     Text::new(&price_string, price_position, text_style).draw(display);
 }
 
-// Drawing the encompassing border
-pub fn hotdog_border<D>(display: &mut D)
+// Drawing the hotdog border
+pub fn hotdog_overlay<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
-    let border_style = PrimitiveStyleBuilder::new()
-        .stroke_width(2)
-        .stroke_color(Rgb565::BLACK)
-        .build();
 
-    RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X, POS_Y), Size::new(300, (POS_Y + FIELD_WIDTH_PRICE + 45 + BOTTOM_PADDING) as u32)),
-        Size::new(10, 10),
-    )
-    .into_styled(border_style)
-    .draw(display);
+        let style = PrimitiveStyleBuilder::new()
+            .stroke_width(5)
+            .stroke_color(Rgb565::BLACK)
+            .fill_color(Rgb565::WHITE)
+            .build();
+
+        RoundedRectangle::with_equal_corners(
+            Rectangle::new(Point::new(POS_X, POS_Y), Size::new(300, (POS_Y + 45 + BOTTOM_PADDING) as u32)),
+            Size::new(10, 10),
+        )
+        .into_styled(style)
+        .draw(display);
 }
