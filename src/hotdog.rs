@@ -121,9 +121,9 @@ where
         .into_styled(style)
         .draw(display);
         
-        Text::new("BUY", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 40, POS_Y + 30), label_style)
+        Text::new("BUY", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 42, POS_Y + 30), label_style)
         .draw(display);
     
-        Text::new("1", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 50, POS_Y + 50), label_style)
+        Text::new("1", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 52, POS_Y + 48), label_style)
         .draw(display);
 }
