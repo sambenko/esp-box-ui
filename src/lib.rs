@@ -55,7 +55,7 @@ where
 }
 
 pub mod hotdog;
-use hotdog::{ hotdog_icon, hotdog_field };
+use hotdog::{ hotdog_icon, hotdog_field, hotdog_border };
 
 pub mod sandwich;
 use sandwich::{ sandwich_icon, sandwich_field };
@@ -67,6 +67,7 @@ pub fn build_inventory<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
 
+        hotdog_border(display);
         hotdog_icon(display);
         hotdog_field(display, 0, 0.0);
 
