@@ -13,9 +13,11 @@ use profont::PROFONT_18_POINT;
 use tinybmp::Bmp;
 
 const POS_X: i32 = 10;
-const POS_Y: i32 = 10; // Starting Y position for the hotdog section
-const FIELD_WIDTH: i32 = 100;
-const LABEL_OFFSET: i32 = 60;
+const POS_Y: i32 = 10;
+const FIELD_WIDTH_AMOUNT: i32 = 50;
+const FIELD_WIDTH_PRICE: i32 = 70; 
+const LABEL_OFFSET: i32 = 80;
+const BOTTOM_PADDING: i32 = 10;
 
 pub fn hotdog_icon<D>(display: &mut D)
 where 
@@ -40,18 +42,20 @@ where
     Text::new("Amount:", Point::new(POS_X + LABEL_OFFSET + 10, POS_Y + 10), label_style)
         .draw(display);
 
-    Text::new("Price:", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH + 20, POS_Y + 10), label_style)
+    Text::new("Price:", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 20, POS_Y + 10), label_style)
         .draw(display);
 
+    // draw amount field
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X + LABEL_OFFSET + 10, POS_Y + 20), Size::new(FIELD_WIDTH as u32, 30)),
+        Rectangle::new(Point::new(POS_X + LABEL_OFFSET, POS_Y + 35), Size::new(FIELD_WIDTH_AMOUNT as u32, 30)),
         Size::new(5, 5),
     )
     .into_styled(style)
     .draw(display);
 
+    // Draw price field
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH + 20, POS_Y + 20), Size::new(FIELD_WIDTH as u32, 30)),
+        Rectangle::new(Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 20, POS_Y + 35), Size::new(FIELD_WIDTH_PRICE as u32, 30)),
         Size::new(5, 5),
     )
     .into_styled(style)
@@ -67,7 +71,7 @@ where
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
     let amount_position = Point::new(POS_X + LABEL_OFFSET + 15, POS_Y + 30);
-    let price_position = Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH + 25, POS_Y + 30);
+    let price_position = Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + 25, POS_Y + 30);
 
     let mut amount_string: heapless::String<16> = heapless::String::new();
     let mut price_string: heapless::String<16> = heapless::String::new();
@@ -77,4 +81,21 @@ where
 
     Text::new(&amount_string, amount_position, text_style).draw(display);
     Text::new(&price_string, price_position, text_style).draw(display);
+}
+
+// Drawing the encompassing border
+pub fn hotdog_border<D>(display: &mut D)
+where 
+    D:DrawTarget<Color = Rgb565>+Dimensions {
+    let border_style = PrimitiveStyleBuilder::new()
+        .stroke_width(2)
+        .stroke_color(Rgb565::BLACK)
+        .build();
+
+    RoundedRectangle::with_equal_corners(
+        Rectangle::new(Point::new(POS_X, POS_Y), Size::new(300, (POS_Y + FIELD_WIDTH_PRICE + 45 + BOTTOM_PADDING) as u32)),
+        Size::new(10, 10),
+    )
+    .into_styled(border_style)
+    .draw(display);
 }
