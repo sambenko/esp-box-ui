@@ -17,15 +17,15 @@ const POS_Y: i32 = 90;
 const FIELD_WIDTH: i32 = 100;
 const LABEL_OFFSET: i32 = 60;
 
-pub fn pizza_icon<D>(display: &mut D)
+pub fn sandwich_icon<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
-    let icon_data = include_bytes!("../icons/humidity.bmp");
-    let pizza = Bmp::from_slice(icon_data).unwrap();
-    Image::new(&pizza, Point::new(POS_X, POS_Y)).draw(display);
+    let icon_data = include_bytes!("../icons/sandwich.bmp");
+    let sandwich = Bmp::from_slice(icon_data).unwrap();
+    Image::new(&sandwich, Point::new(POS_X, POS_Y)).draw(display);
 }
 
-pub fn pizza_field<D>(display: &mut D, amount: i32, price: f32)
+pub fn sandwich_field<D>(display: &mut D, amount: i32, price: f32)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
 
@@ -61,10 +61,10 @@ where
     .into_styled(style)
     .draw(display);
 
-    update_pizza(display, amount, price);
+    update_sandwich(display, amount, price);
 }
 
-pub fn update_pizza<D>(display: &mut D, amount: i32, price: f32)
+pub fn update_sandwich<D>(display: &mut D, amount: i32, price: f32)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
 

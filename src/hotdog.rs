@@ -20,7 +20,7 @@ const LABEL_OFFSET: i32 = 60;
 pub fn hotdog_icon<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
-    let icon_data = include_bytes!("../icons/temperature.bmp");
+    let icon_data = include_bytes!("../icons/hot-dog.bmp");
     let hotdog = Bmp::from_slice(icon_data).unwrap();
     Image::new(&hotdog, Point::new(POS_X, POS_Y)).draw(display);
 }

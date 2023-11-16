@@ -57,8 +57,8 @@ where
 pub mod hotdog;
 use hotdog::{ hotdog_icon, hotdog_field };
 
-pub mod pizza;
-use pizza::{ pizza_icon, pizza_field };
+pub mod sandwich;
+use sandwich::{ sandwich_icon, sandwich_field };
 
 pub mod energy_drink;
 use energy_drink::{ energy_drink_icon, energy_drink_field };
@@ -70,8 +70,8 @@ where
         hotdog_icon(display);
         hotdog_field(display, 0, 0.0);
 
-        pizza_icon(display);
-        pizza_field(display, 0, 0.0);
+        sandwich_icon(display);
+        sandwich_field(display, 0, 0.0);
 
         energy_drink_icon(display);
         energy_drink_field(display, 0, 0.0);

@@ -20,7 +20,7 @@ const LABEL_OFFSET: i32 = 60;
 pub fn energy_drink_icon<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
-    let icon_data = include_bytes!("../icons/pressure.bmp");
+    let icon_data = include_bytes!("../icons/energy_drink.bmp");
     let energy_drink = Bmp::from_slice(icon_data).unwrap();
     Image::new(&energy_drink, Point::new(POS_X, POS_Y)).draw(display);
 }
