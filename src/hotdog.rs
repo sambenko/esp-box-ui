@@ -115,15 +115,15 @@ where
         let label_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
         RoundedRectangle::with_equal_corners(
-            Rectangle::new(Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 25, POS_Y + 10), Size::new((FIELD_WIDTH_PRICE - 10) as u32, 50)),
+            Rectangle::new(Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 30, POS_Y + 10), Size::new((FIELD_WIDTH_PRICE - 10) as u32, 45)),
             Size::new(5, 5),
         )
         .into_styled(style)
         .draw(display);
         
-        Text::new("BUY", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 35, POS_Y + 30), label_style)
+        Text::new("BUY", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 40, POS_Y + 30), label_style)
         .draw(display);
     
-        Text::new("1", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 45, POS_Y + 45), label_style)
+        Text::new("1", Point::new(POS_X + LABEL_OFFSET + FIELD_WIDTH_AMOUNT + FIELD_WIDTH_PRICE + 50, POS_Y + 50), label_style)
         .draw(display);
 }
