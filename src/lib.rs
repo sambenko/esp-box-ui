@@ -55,7 +55,7 @@ where
 }
 
 pub mod hotdog;
-use hotdog::{ hotdog_icon, hotdog_field, hotdog_overlay };
+use hotdog::{ hotdog_icon, hotdog_field, hotdog_overlay, buy_one_button };
 
 pub mod sandwich;
 use sandwich::{ sandwich_icon, sandwich_field };
@@ -70,6 +70,7 @@ where
         hotdog_overlay(display);
         hotdog_icon(display);
         hotdog_field(display, 0, 0.0);
+        buy_one_button(display);
 
         sandwich_icon(display);
         sandwich_field(display, 0, 0.0);
