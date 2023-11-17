@@ -26,6 +26,7 @@ pub enum SensorType {
 pub struct SensorData {
     pub sensor_type: SensorType,
     pub pos_x: i32,
+    pub value: f32,
 }
 
 const FIELD_WIDTH: u32 = 70;
