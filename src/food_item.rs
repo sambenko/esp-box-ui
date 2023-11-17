@@ -84,13 +84,15 @@ where
     )
     .into_styled(style)
     .draw(display);
-
-    update_field(display, food_item);
 }
 
 pub fn update_field<D>(display: &mut D, food_item: &FoodItem)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
+
+    // Redraw the field background to clear the previous value
+    draw_field(display, food_item);
+    
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
 
     let amount_position = Point::new(POS_X + LABEL_OFFSET + 17, food_item.pos_y + 45);
