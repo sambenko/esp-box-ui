@@ -15,6 +15,8 @@ use tinybmp::Bmp;
 pub struct FoodItem<'a> {
     pub name: &'a str,
     pub pos_y: i32,
+    pub amount: i32,
+    pub price: f32,
 }
 
 const HOTDOG_ICON: &[u8] = include_bytes!("../icons/hot-dog.bmp");
@@ -29,12 +31,12 @@ const LABEL_OFFSET: i32 = 80;
 const BOTTOM_PADDING: i32 = 10;
 const ITEM_HEIGHT: u32 = 65;
 
-pub fn build_food_item<D>(display: &mut D, food_item: &FoodItem, amount: i32, price: f32)
+pub fn build_food_item<D>(display: &mut D, food_item: &FoodItem)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
     draw_border(display, food_item);
     draw_icon(display, food_item);
-    draw_field(display, food_item, amount, price);
+    draw_field(display, food_item);
     draw_buy_button(display, food_item);
 }
 
@@ -52,7 +54,7 @@ where
     Image::new(&icon, Point::new(POS_X + 10, food_item.pos_y + 10)).draw(display);
 }
 
-fn draw_field<D>(display: &mut D, food_item: &FoodItem, amount: i32, price: f32)
+fn draw_field<D>(display: &mut D, food_item: &FoodItem)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
     let style = PrimitiveStyleBuilder::new()
@@ -83,10 +85,10 @@ where
     .into_styled(style)
     .draw(display);
 
-    update_field(display, food_item, amount, price);
+    update_field(display, food_item);
 }
 
-fn update_field<D>(display: &mut D, food_item: &FoodItem, amount: i32, price: f32)
+fn update_field<D>(display: &mut D, food_item: &FoodItem)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
@@ -97,8 +99,8 @@ where
     let mut amount_string: heapless::String<16> = heapless::String::new();
     let mut price_string: heapless::String<16> = heapless::String::new();
 
-    write!(amount_string, "{}", amount).unwrap();
-    write!(price_string, "${:.2}", price).unwrap();
+    write!(amount_string, "{}", food_item.amount).unwrap();
+    write!(price_string, "${:.2}", food_item.price).unwrap();
 
     Text::new(&amount_string, amount_position, text_style).draw(display);
     Text::new(&price_string, price_position, text_style).draw(display);
