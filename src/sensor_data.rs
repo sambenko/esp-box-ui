@@ -79,7 +79,7 @@ where
     draw_field(display, sensor_data);
 
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
-    let text_position = Point::new(sensor_data.pos_x + 10, POS_Y + FIELD_WIDTH as i32 + TEXT_OFFSET);
+    let text_position = Point::new(sensor_data.pos_x + 8, POS_Y + FIELD_WIDTH as i32 + TEXT_OFFSET);
 
     let mut data_string: heapless::String<16> = heapless::String::new();
     write!(data_string, "{:.1}", sensor_data.value).unwrap();
