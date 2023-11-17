@@ -69,15 +69,17 @@ where
     )
     .into_styled(style)
     .draw(display);
-
-    update_sensor_data(display, sensor_data);
 }
 
 pub fn update_sensor_data<D>(display: &mut D, sensor_data: &SensorData)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
+
+    // Redraw the field background to clear the previous value
+    draw_field(display, sensor_data);
+
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
-    let text_position = Point::new(sensor_data.pos_x + 15, POS_Y + FIELD_WIDTH as i32 + TEXT_OFFSET);
+    let text_position = Point::new(sensor_data.pos_x + 10, POS_Y + FIELD_WIDTH as i32 + TEXT_OFFSET);
 
     let mut data_string: heapless::String<16> = heapless::String::new();
     write!(data_string, "{:.1}", sensor_data.value).unwrap();
