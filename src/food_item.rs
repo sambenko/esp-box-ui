@@ -27,6 +27,7 @@ const FIELD_WIDTH_AMOUNT: i32 = 50;
 const FIELD_WIDTH_PRICE: i32 = 70;
 const LABEL_OFFSET: i32 = 80;
 const BOTTOM_PADDING: i32 = 10;
+const ITEM_HEIGHT: u32 = 65;
 
 pub fn build_food_item<D>(display: &mut D, food_item: &FoodItem, amount: i32, price: f32)
 where 
@@ -112,12 +113,12 @@ where
         .fill_color(Rgb565::WHITE)
         .build();
 
-    RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(POS_X, food_item.pos_y), Size::new(300, (food_item.pos_y + 45 + BOTTOM_PADDING) as u32)),
-        Size::new(10, 10),
-    )
-    .into_styled(border_style)
-    .draw(display);
+        RoundedRectangle::with_equal_corners(
+            Rectangle::new(Point::new(POS_X, food_item.pos_y), Size::new(300, ITEM_HEIGHT)),
+            Size::new(10, 10),
+        )
+        .into_styled(border_style)
+        .draw(display);
 }
 
 fn draw_buy_button<D>(display: &mut D, food_item: &FoodItem)
