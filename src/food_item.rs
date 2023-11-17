@@ -88,7 +88,7 @@ where
     update_field(display, food_item);
 }
 
-fn update_field<D>(display: &mut D, food_item: &FoodItem)
+pub fn update_field<D>(display: &mut D, food_item: &FoodItem)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
