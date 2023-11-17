@@ -11,16 +11,10 @@ use core::fmt::Write as FmtWrite;
 
 use tinybmp::Bmp;
 
-pub mod temperature;
-use temperature::{ temperature_icon, temperature_field };
+pub mod sensor_data;
+use sensor_data::{ SensorData, draw_sensor_data };
 
-pub mod humidity;
-use humidity::{ humidity_icon, humidity_field };
-
-pub mod pressure;
-use pressure::{ pressure_icon, pressure_field };
-
-fn overlay<D>(display: &mut D)
+fn sensor_overlay<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
 
@@ -38,20 +32,18 @@ where
         .draw(display);
 }
 
-pub fn build_ui<D>(display: &mut D)
-where 
+pub fn build_sensor_ui<D>(
+    display: &mut D, 
+    temperature_data: &SensorData,
+    humidity_data: &SensorData,
+    pressure_data: &SensorData
+) where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
 
-        overlay(display);
-
-        temperature_icon(display);
-        temperature_field(display);
-
-        humidity_icon(display);
-        humidity_field(display);
-
-        pressure_icon(display);
-        pressure_field(display);
+        sensor_overlay(display);
+        draw_sensor_data(display, &temperature_data);
+        draw_sensor_data(display, &humidity_data);
+        draw_sensor_data(display, &pressure_data);
 }
 
 pub mod food_item;
@@ -60,7 +52,7 @@ use food_item::{ FoodItem, build_food_item };
 pub fn build_inventory<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
-        
+
     let hotdog = FoodItem {
         name: "Hotdog",
         pos_y: 10,
