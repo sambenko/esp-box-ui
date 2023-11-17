@@ -58,10 +58,10 @@ pub mod hotdog;
 use hotdog::{ hotdog_icon, hotdog_field, hotdog_overlay, buy_one_button };
 
 pub mod sandwich;
-use sandwich::{ sandwich_icon, sandwich_field };
+use sandwich::{ sandwich_icon, sandwich_field, sandwich_overlay };
 
 pub mod energy_drink;
-use energy_drink::{ energy_drink_icon, energy_drink_field };
+use energy_drink::{ energy_drink_icon, energy_drink_field, energy_drink_overlay };
 
 pub fn build_inventory<D>(display: &mut D)
 where 
@@ -72,9 +72,13 @@ where
         hotdog_field(display, 0, 0.0);
         buy_one_button(display);
 
+        sandwich_overlay(display);
         sandwich_icon(display);
         sandwich_field(display, 0, 0.0);
+        buy_one_button(display);
 
+        energy_drink_overlay(display);
         energy_drink_icon(display);
         energy_drink_field(display, 0, 0.0);
+        buy_one_button(display);
 }
