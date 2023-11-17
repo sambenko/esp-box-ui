@@ -69,6 +69,8 @@ where
     )
     .into_styled(style)
     .draw(display);
+
+    update_sensor_data(display, sensor_data);
 }
 
 pub fn update_sensor_data<D>(display: &mut D, sensor_data: &SensorData)
