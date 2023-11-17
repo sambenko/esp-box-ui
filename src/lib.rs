@@ -54,31 +54,30 @@ where
         pressure_field(display);
 }
 
-pub mod hotdog;
-use hotdog::{ hotdog_icon, hotdog_field, hotdog_overlay, buy_one_button };
-
-pub mod sandwich;
-use sandwich::{ sandwich_icon, sandwich_field, sandwich_overlay };
-
-pub mod energy_drink;
-use energy_drink::{ energy_drink_icon, energy_drink_field, energy_drink_overlay };
+pub mod food_item;
+use food_item::{ FoodItem, build_food_item };
 
 pub fn build_inventory<D>(display: &mut D)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
+        
+    let hotdog = FoodItem {
+        name: "Hotdog",
+        pos_y: 10,
+    };
+    
+    let sandwich = FoodItem {
+        name: "Sandwich",
+        pos_y: 80,
+    };
+    
+    let energy_drink = FoodItem {
+        name: "Energy Drink",
+        pos_y: 150,
+    };
 
-        hotdog_overlay(display);
-        hotdog_icon(display);
-        hotdog_field(display, 0, 0.0);
-        buy_one_button(display);
-
-        sandwich_overlay(display);
-        sandwich_icon(display);
-        sandwich_field(display, 0, 0.0);
-        buy_one_button(display);
-
-        energy_drink_overlay(display);
-        energy_drink_icon(display);
-        energy_drink_field(display, 0, 0.0);
-        buy_one_button(display);
+    // Build the UI for each food item
+    build_food_item(display, &hotdog, 0, 0.0);
+    build_food_item(display, &sandwich, 0, 0.0);
+    build_food_item(display, &energy_drink, 0, 0.0);
 }
