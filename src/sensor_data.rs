@@ -82,7 +82,5 @@ where
     let mut data_string: heapless::String<16> = heapless::String::new();
     write!(data_string, "{:.1}", sensor_data.value).unwrap();
 
-    // Redraw the field to clear previous data
-    draw_field(display, sensor_data);
     Text::new(&data_string, text_position, text_style).draw(display);
 }
