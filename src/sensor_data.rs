@@ -2,10 +2,13 @@
 #![allow(warnings)]
 
 use embedded_graphics::{
-    mono_font::MonoTextStyle, pixelcolor::Rgb565, text::Text, Drawable,
-    primitives::{RoundedRectangle, PrimitiveStyleBuilder, Rectangle, Primitive},
-    image::Image, 
-    prelude::{DrawTarget, Dimensions, Point, RgbColor, WebColors, Size},
+    image::Image,
+    mono_font::MonoTextStyle,
+    pixelcolor::Rgb565,
+    prelude::{Dimensions, DrawTarget, Point, RgbColor, Size, WebColors},
+    primitives::{Primitive, PrimitiveStyleBuilder, Rectangle, RoundedRectangle},
+    text::Text,
+    Drawable,
 };
 
 use core::fmt::Write as FmtWrite;
@@ -35,15 +38,17 @@ const TEXT_OFFSET: i32 = 23;
 const POS_Y: i32 = 70;
 
 pub fn draw_sensor_data<D>(display: &mut D, sensor_data: &SensorData)
-where 
-    D:DrawTarget<Color = Rgb565>+Dimensions {
+where
+    D: DrawTarget<Color = Rgb565> + Dimensions,
+{
     draw_icon(display, sensor_data);
     draw_field(display, sensor_data);
 }
 
 fn draw_icon<D>(display: &mut D, sensor_data: &SensorData)
-where 
-    D:DrawTarget<Color = Rgb565>+Dimensions {
+where
+    D: DrawTarget<Color = Rgb565> + Dimensions,
+{
     let icon_data = match sensor_data.sensor_type {
         SensorType::Temperature => TEMPERATURE_ICON,
         SensorType::Pressure => PRESSURE_ICON,
@@ -55,8 +60,9 @@ where
 }
 
 fn draw_field<D>(display: &mut D, sensor_data: &SensorData)
-where 
-    D:DrawTarget<Color = Rgb565>+Dimensions {
+where
+    D: DrawTarget<Color = Rgb565> + Dimensions,
+{
     let style = PrimitiveStyleBuilder::new()
         .stroke_width(5)
         .stroke_color(Rgb565::BLACK)
@@ -64,7 +70,10 @@ where
         .build();
 
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(sensor_data.pos_x, POS_Y + FIELD_WIDTH as i32), Size::new(FIELD_WIDTH, 35)),
+        Rectangle::new(
+            Point::new(sensor_data.pos_x, POS_Y + FIELD_WIDTH as i32),
+            Size::new(FIELD_WIDTH, 35),
+        ),
         Size::new(10, 10),
     )
     .into_styled(style)
@@ -72,14 +81,17 @@ where
 }
 
 pub fn update_sensor_data<D>(display: &mut D, sensor_data: &SensorData)
-where 
-    D:DrawTarget<Color = Rgb565>+Dimensions {
-
+where
+    D: DrawTarget<Color = Rgb565> + Dimensions,
+{
     // Redraw the field background to clear the previous value
     draw_field(display, sensor_data);
 
     let text_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
-    let text_position = Point::new(sensor_data.pos_x + 8, POS_Y + FIELD_WIDTH as i32 + TEXT_OFFSET);
+    let text_position = Point::new(
+        sensor_data.pos_x + 8,
+        POS_Y + FIELD_WIDTH as i32 + TEXT_OFFSET,
+    );
 
     let mut data_string: heapless::String<16> = heapless::String::new();
     write!(data_string, "{:.1}", sensor_data.value).unwrap();
