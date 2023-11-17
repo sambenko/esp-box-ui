@@ -31,9 +31,9 @@ const BOTTOM_PADDING: i32 = 10;
 pub fn build_food_item<D>(display: &mut D, food_item: &FoodItem, amount: i32, price: f32)
 where 
     D:DrawTarget<Color = Rgb565>+Dimensions {
+    draw_border(display, food_item);
     draw_icon(display, food_item);
     draw_field(display, food_item, amount, price);
-    draw_border(display, food_item);
     draw_buy_button(display, food_item);
 }
 
