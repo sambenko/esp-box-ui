@@ -74,7 +74,7 @@ where
         RoundedRectangle::with_equal_corners(
             Rectangle::new(
                 Point::new(sensor_data.pos_x, POS_Y + FIELD_WIDTH as i32),
-                Size::new(FIELD_WIDTH + 10, 35),
+                Size::new(FIELD_WIDTH + 12, 35),
             ),
             Size::new(10, 10),
         )
