@@ -29,7 +29,7 @@ where
         .build();
 
     RoundedRectangle::with_equal_corners(
-        Rectangle::new(Point::new(19, 20), Size::new(280, 200)),
+        Rectangle::new(Point::new(19, 20), Size::new(280, 150)),
         Size::new(10, 10),
     )
     .into_styled(style)
