@@ -20,6 +20,7 @@ const TEMPERATURE_ICON: &[u8] = include_bytes!("../icons/temperature.bmp");
 const PRESSURE_ICON: &[u8] = include_bytes!("../icons/pressure.bmp");
 const HUMIDITY_ICON: &[u8] = include_bytes!("../icons/humidity.bmp");
 
+#[derive(PartialEq)]
 pub enum SensorType {
     Temperature,
     Pressure,
@@ -69,15 +70,28 @@ where
         .fill_color(Rgb565::CSS_ALICE_BLUE)
         .build();
 
-    RoundedRectangle::with_equal_corners(
-        Rectangle::new(
-            Point::new(sensor_data.pos_x, POS_Y + FIELD_WIDTH as i32),
-            Size::new(FIELD_WIDTH, 35),
-        ),
-        Size::new(10, 10),
-    )
-    .into_styled(style)
-    .draw(display);
+    if (sensor_data.sensor_type == SensorType::Pressure) {
+        RoundedRectangle::with_equal_corners(
+            Rectangle::new(
+                Point::new(sensor_data.pos_x, POS_Y + FIELD_WIDTH as i32),
+                Size::new(FIELD_WIDTH + 10, 35),
+            ),
+            Size::new(10, 10),
+        )
+        .into_styled(style)
+        .draw(display);
+
+    } else {
+        RoundedRectangle::with_equal_corners(
+            Rectangle::new(
+                Point::new(sensor_data.pos_x, POS_Y + FIELD_WIDTH as i32),
+                Size::new(FIELD_WIDTH, 35),
+            ),
+            Size::new(10, 10),
+        )
+        .into_styled(style)
+        .draw(display);
+    }    
 }
 
 pub fn update_sensor_data<D>(display: &mut D, sensor_data: &SensorData)
