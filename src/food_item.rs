@@ -15,6 +15,7 @@ use core::fmt::Write as FmtWrite;
 use profont::PROFONT_18_POINT;
 use tinybmp::Bmp;
 
+#[derive(Clone)]
 pub struct FoodItem<'a> {
     pub name: &'a str,
     pub pos_y: i32,
