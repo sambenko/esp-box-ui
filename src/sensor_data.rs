@@ -20,15 +20,15 @@ const TEMPERATURE_ICON: &[u8] = include_bytes!("../icons/temperature.bmp");
 const PRESSURE_ICON: &[u8] = include_bytes!("../icons/pressure.bmp");
 const HUMIDITY_ICON: &[u8] = include_bytes!("../icons/humidity.bmp");
 
-#[derive(PartialEq)]
-#[derive(Copy, Clone)]
 
+#[derive(PartialEq, Clone)]
 pub enum SensorType {
     Temperature,
     Pressure,
     Humidity,
 }
 
+#[derive(Clone)]
 pub struct SensorData {
     pub sensor_type: SensorType,
     pub pos_x: i32,
