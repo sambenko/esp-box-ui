@@ -21,6 +21,8 @@ const PRESSURE_ICON: &[u8] = include_bytes!("../icons/pressure.bmp");
 const HUMIDITY_ICON: &[u8] = include_bytes!("../icons/humidity.bmp");
 
 #[derive(PartialEq)]
+#[derive(Copy, Clone)]
+
 pub enum SensorType {
     Temperature,
     Pressure,
