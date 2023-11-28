@@ -62,19 +62,19 @@ pub fn build_inventory<D>(
     D: DrawTarget<Color = Rgb565> + Dimensions,
 {
     // Build the UI for each food item
-    if hotdog.hightlighted {
+    if hotdog.highlighted {
         build_food_item(display, &hotdog, Rgb565::CSS_SEA_GREEN);
     } else {
         build_food_item(display, &hotdog, Rgb565::CSS_BLACK);
     }
 
-    if sandwich.hightlighted {
+    if sandwich.highlighted {
         build_food_item(display, &sandwich, Rgb565::CSS_SEA_GREEN);
     } else {
         build_food_item(display, &sandwich, Rgb565::CSS_BLACK);
     }
 
-    if energy_drink.hightlighted {
+    if energy_drink.highlighted {
         build_food_item(display, &energy_drink, Rgb565::CSS_SEA_GREEN);
     } else {
         build_food_item(display, &energy_drink, Rgb565::CSS_BLACK);
