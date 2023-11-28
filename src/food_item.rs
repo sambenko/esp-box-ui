@@ -28,6 +28,10 @@ const HOTDOG_ICON: &[u8] = include_bytes!("../icons/hot-dog.bmp");
 const SANDWICH_ICON: &[u8] = include_bytes!("../icons/sandwich.bmp");
 const ENERGY_DRINK_ICON: &[u8] = include_bytes!("../icons/energy_drink.bmp");
 
+const HOTDOG_ICON_HIGHLIGHTED: &[u8] = include_bytes!("../icons/hot-dog_highlighted.bmp");
+const SANDWICH_ICON_HIGHLIGHTED: &[u8] = include_bytes!("../icons/sandwich_highlighted.bmp");
+const ENERGY_DRINK_ICON_HIGHLIGHTED: &[u8] = include_bytes!("../icons/energy_drink_highlighted.bmp");
+
 const POS_X: i32 = 10;
 const FIELD_WIDTH_AMOUNT: i32 = 50;
 const FIELD_WIDTH_PRICE: i32 = 70;
@@ -49,11 +53,20 @@ fn draw_icon<D>(display: &mut D, food_item: &FoodItem)
 where
     D: DrawTarget<Color = Rgb565> + Dimensions,
 {
-    let icon_data = match food_item.name {
-        "Hotdog" => HOTDOG_ICON,
-        "Sandwich" => SANDWICH_ICON,
-        "Energy Drink" => ENERGY_DRINK_ICON,
-        _ => return,
+    let icon_data = if food_item.highlighted {
+        match food_item.name {
+            "Hotdog" => HOTDOG_ICON_HIGHLIGHTED,
+            "Sandwich" => SANDWICH_ICON_HIGHLIGHTED,
+            "Energy Drink" => ENERGY_DRINK_ICON_HIGHLIGHTED,
+            _ => return,
+        }
+    } else {
+        match food_item.name {
+            "Hotdog" => HOTDOG_ICON,
+            "Sandwich" => SANDWICH_ICON,
+            "Energy Drink" => ENERGY_DRINK_ICON,
+            _ => return,
+        }
     };
 
     let icon = Bmp::from_slice(icon_data).unwrap();
