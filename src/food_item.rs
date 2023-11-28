@@ -21,6 +21,7 @@ pub struct FoodItem<'a> {
     pub pos_y: i32,
     pub amount: i32,
     pub price: f32,
+    pub hightlighted: bool,
 }
 
 const HOTDOG_ICON: &[u8] = include_bytes!("../icons/hot-dog.bmp");
