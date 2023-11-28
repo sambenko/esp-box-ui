@@ -178,7 +178,7 @@ where
     D: DrawTarget<Color = Rgb565> + Dimensions,
 {
     let button_color = if food_item.purchased {
-        Rgb565::CSS_LIGHT_GREEN // Change to green if purchased
+        Rgb565::CSS_SEA_GREEN // Change to green if purchased
     } else {
         Rgb565::CSS_ALICE_BLUE
     };
