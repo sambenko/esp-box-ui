@@ -173,7 +173,7 @@ where
     .draw(display);
 }
 
-fn draw_buy_button<D>(display: &mut D, food_item: &FoodItem)
+pub fn draw_buy_button<D>(display: &mut D, food_item: &FoodItem)
 where
     D: DrawTarget<Color = Rgb565> + Dimensions,
 {
