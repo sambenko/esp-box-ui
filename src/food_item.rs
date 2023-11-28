@@ -22,6 +22,7 @@ pub struct FoodItem<'a> {
     pub amount: i32,
     pub price: f32,
     pub highlighted: bool,
+    pub purchased: bool,
 }
 
 const HOTDOG_ICON: &[u8] = include_bytes!("../icons/hot-dog.bmp");
@@ -176,10 +177,16 @@ fn draw_buy_button<D>(display: &mut D, food_item: &FoodItem)
 where
     D: DrawTarget<Color = Rgb565> + Dimensions,
 {
+    let button_color = if food_item.purchased {
+        Rgb565::CSS_LIGHT_GREEN // Change to green if purchased
+    } else {
+        Rgb565::CSS_ALICE_BLUE
+    };
+
     let button_style = PrimitiveStyleBuilder::new()
         .stroke_width(3)
         .stroke_color(Rgb565::BLACK)
-        .fill_color(Rgb565::CSS_ALICE_BLUE)
+        .fill_color(button_color)
         .build();
 
     let label_style = MonoTextStyle::new(&PROFONT_18_POINT, RgbColor::BLACK);
