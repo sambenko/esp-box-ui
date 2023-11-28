@@ -63,20 +63,20 @@ pub fn build_inventory<D>(
 {
     // Build the UI for each food item
     if hotdog.highlighted {
-        build_food_item(display, &hotdog, Rgb565::CSS_SEA_GREEN);
+        build_food_item(display, &hotdog, Rgb565::CSS_DARK_GREEN, Rgb565::CSS_DARK_SEA_GREEN);
     } else {
-        build_food_item(display, &hotdog, Rgb565::CSS_BLACK);
+        build_food_item(display, &hotdog, Rgb565::CSS_BLACK, Rgb565::CSS_WHITE);
     }
 
     if sandwich.highlighted {
-        build_food_item(display, &sandwich, Rgb565::CSS_SEA_GREEN);
+        build_food_item(display, &sandwich, Rgb565::CSS_DARK_GREEN, Rgb565::CSS_DARK_SEA_GREEN);
     } else {
-        build_food_item(display, &sandwich, Rgb565::CSS_BLACK);
+        build_food_item(display, &sandwich, Rgb565::CSS_BLACK, Rgb565::CSS_WHITE);
     }
 
     if energy_drink.highlighted {
-        build_food_item(display, &energy_drink, Rgb565::CSS_SEA_GREEN);
+        build_food_item(display, &energy_drink, Rgb565::CSS_DARK_GREEN, Rgb565::CSS_DARK_SEA_GREEN);
     } else {
-        build_food_item(display, &energy_drink, Rgb565::CSS_BLACK);
+        build_food_item(display, &energy_drink, Rgb565::CSS_BLACK, Rgb565::CSS_WHITE);
     }
 }
