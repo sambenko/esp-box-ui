@@ -34,11 +34,11 @@ const LABEL_OFFSET: i32 = 80;
 const BOTTOM_PADDING: i32 = 10;
 const ITEM_HEIGHT: u32 = 65;
 
-pub fn build_food_item<D>(display: &mut D, food_item: &FoodItem)
+pub fn build_food_item<D>(display: &mut D, food_item: &FoodItem, color: Rgb565)
 where
     D: DrawTarget<Color = Rgb565> + Dimensions,
 {
-    draw_border(display, food_item);
+    draw_border(display, food_item, color);
     draw_icon(display, food_item);
     draw_field(display, food_item);
     draw_buy_button(display, food_item);
@@ -137,13 +137,13 @@ where
     Text::new(&price_string, price_position, text_style).draw(display);
 }
 
-fn draw_border<D>(display: &mut D, food_item: &FoodItem)
+fn draw_border<D>(display: &mut D, food_item: &FoodItem, color: Rgb565)
 where
     D: DrawTarget<Color = Rgb565> + Dimensions,
 {
     let border_style = PrimitiveStyleBuilder::new()
         .stroke_width(5)
-        .stroke_color(Rgb565::BLACK)
+        .stroke_color(color)
         .fill_color(Rgb565::WHITE)
         .build();
 
