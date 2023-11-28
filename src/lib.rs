@@ -62,7 +62,7 @@ pub fn build_inventory<D>(
     D: DrawTarget<Color = Rgb565> + Dimensions,
 {
     // Build the UI for each food item
-    build_food_item(display, &hotdog);
-    build_food_item(display, &sandwich);
-    build_food_item(display, &energy_drink);
+    build_food_item(display, &hotdog, Rgb565::GREEN);
+    build_food_item(display, &sandwich, Rgb565::BLACK);
+    build_food_item(display, &energy_drink, Rgb565::BLACK);
 }
